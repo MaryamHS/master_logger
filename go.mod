@@ -1,4 +1,4 @@
-module master_logger
+module github.com/Gimulator/master-logger
 
 go 1.15
 

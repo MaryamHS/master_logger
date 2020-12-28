@@ -10,7 +10,7 @@ import (
 	"github.com/Gimulator/protobuf/go/api"
 	"google.golang.org/grpc"
 	"github.com/sirupsen/logrus"
-	"github.com/Gimulator/master_logger/s3"
+	"github.com/Gimulator/master-logger/s3"
 )
 
 type Logger struct {
@@ -117,7 +117,7 @@ func (l *Logger) watchReceiver(stream api.MessageAPI_WatchClient) {
 		if err != nil{
 			return err
 		}
-		_, err := l.file.WriteString(fmt.Sprintf("%v\n", mes))
+		_, err = l.file.WriteString(fmt.Sprintf("%v\n", mes))
 		if err == io.EOF {
 			break
 		}
@@ -137,7 +137,8 @@ func (l *Logger) watchReceiver(stream api.MessageAPI_WatchClient) {
 		}
 
 	return nil
-	}
+}
+
 
 func (l *Logger) appendMetadata(ctx context.Context) context.Context {
 	data := make(map[string]string)
@@ -181,7 +182,7 @@ func track()  error{
 	}
 
 	l.log.Info("starting to watch ...")
-	err := l.Watch() 
+	err = l.Watch() 
 	if err != nil {
 		l.log.WithError(err).Error("error while watching")
 		return err
